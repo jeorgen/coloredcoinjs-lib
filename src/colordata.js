@@ -193,13 +193,15 @@ export default class ColorData {
             if (cvalue === null) {
               return
             }
-
-            await this._storage.add({
+            console.log('ADDRESS: ' + tx.outputs[outIndex].script.toAddress())
+            let outAddress = tx.outputs[outIndex].script.toAddress().toString()
+            await this._storage.add({ // jorgen@webworks.se, this could be a good place to send in the raw transaction as well
               colorCode: colorCode,
               txId: txId,
               outIndex: outIndex,
               colorId: colorId,
-              value: cvalue.getValue()
+              value: cvalue.getValue(),
+              outAddress: outAddress
             })
           })
         }
